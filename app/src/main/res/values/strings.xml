@@ -3,4 +3,5 @@
     <string name="search">Search</string>
     <string name="title">Title:</string>
     <string name="author">Author:</string>
+    <string name="no_data_prompt">Enter some keywords in the search bar and press search!</string>
 </resources>

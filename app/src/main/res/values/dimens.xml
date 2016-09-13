@@ -5,4 +5,5 @@
     <dimen name="list_header_dimen">16sp</dimen>
     <dimen name="list_author_dimen">16sp</dimen>
     <dimen name="list_title_dimen">16sp</dimen>
+    <dimen name="no_data_prompt_size">20sp</dimen>
 </resources>

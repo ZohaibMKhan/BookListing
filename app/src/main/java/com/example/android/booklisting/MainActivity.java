@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
             ListView bookList = (ListView) findViewById(R.id.book_list);
 
             bookList.setAdapter(bookAdapter);
+
+            TextView prompt = (TextView) findViewById(R.id.prompt);
+            if (prompt.getVisibility() == View.VISIBLE) {
+                prompt.setVisibility(View.GONE);
+            }
         }
 
         /**
