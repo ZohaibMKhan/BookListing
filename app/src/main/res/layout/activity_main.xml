@@ -33,8 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/no_data_prompt"
-        android:textSize="@dimen/no_data_prompt_size"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:textSize="@dimen/no_data_prompt_size" />
 
     <ListView
         android:id="@+id/book_list"
