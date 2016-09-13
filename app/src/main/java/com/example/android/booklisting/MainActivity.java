@@ -1,5 +1,8 @@
 package com.example.android.booklisting;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,7 +48,16 @@ public class MainActivity extends AppCompatActivity {
                 searchString = searchString.replace(" ", "+");
                 URL_RESULT += searchString + "&maxResults=10";
                 BooksAsyncTask task = new BooksAsyncTask();
-                task.execute();
+                ConnectivityManager cm =
+                        (ConnectivityManager)MainActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                boolean isConnected = activeNetwork != null &&
+                        activeNetwork.isConnectedOrConnecting();
+
+                if (isConnected) {
+                    task.execute();
+                }
             }
         });
     }
@@ -174,10 +186,13 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject currentItem = itemsArray.getJSONObject(i);
                     JSONObject volumeInfo = currentItem.getJSONObject("volumeInfo");
                     String bookTitle = volumeInfo.getString("title");
-                    JSONArray authors = volumeInfo.getJSONArray("authors");
-                    // creates a list of the authors as a string
-                    String bookAuthors = authors.join(", ") + ".";
-                    bookAuthors = bookAuthors.replaceAll("\"", "");
+                    String bookAuthors = "";
+                    if (volumeInfo.has("authors")) {
+                        JSONArray authors = volumeInfo.getJSONArray("authors");
+                        // creates a list of the authors as a string
+                        bookAuthors = authors.join(", ") + ".";
+                        bookAuthors = bookAuthors.replaceAll("\"", "");
+                    }
                     bookList.add(new Book(bookTitle, bookAuthors));
                 }
                 return bookList;

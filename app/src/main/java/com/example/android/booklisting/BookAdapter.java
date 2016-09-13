@@ -29,13 +29,21 @@ public class BookAdapter extends ArrayAdapter<Book> {
 
         Book currentBook = getItem(position);
 
-        TextView currentBookTitle = (TextView) listItemView.findViewById(R.id.book_title);
-        TextView currentAuthor = (TextView) listItemView.findViewById(R.id.book_author);
+        ViewHolder holder = new ViewHolder();
 
-        currentBookTitle.setText(currentBook.getBookName());
-        currentAuthor.setText(currentBook.getAuthor());
+        holder.bookTitle = (TextView) listItemView.findViewById(R.id.book_title);
+        holder.author = (TextView) listItemView.findViewById(R.id.book_author);
+        listItemView.setTag(holder);
+
+        holder.bookTitle.setText(currentBook.getBookName());
+        holder.author.setText(currentBook.getAuthor());
 
 
         return listItemView;
+    }
+
+    static class ViewHolder {
+        TextView bookTitle;
+        TextView author;
     }
 }
